@@ -11,20 +11,19 @@ III: Зафиксировать в документации план работ,
 
 # Адресное пространство:
 
-## interfaces Loopback:
+### interfaces Loopback:
 SPINE1 10.0.1.1/32  
-SPINE2 | 10.0.1.2/32 |
-| leaf1 | 10.1.1.1/32 |
-| leaf2 | 10.1.1.2/32 |
-| leaf3 | 10.1.1.3/32 |
+SPINE2 10.0.1.2/32  
+leaf1 10.1.1.1/32  
+leaf2 10.1.1.2/32  
+leaf3 10.1.1.3/32  
 
 
-
-## P2P 
-|SPINE1-LEAF1| 10.2.1.0/31|
-|SPINE1-LEAF2| 10.2.1.2/31|
-|SPINE1-LEAF3| 10.2.1.4/31|
-|SPINE2-LEAF1| 10.2.2.0/31|
-|SPINE2-LEAF2| 10.2.2.2/31|
-|SPINE2-LEAF3| 10.2.2.4/31|
+##$ P2P 
+SINE1-LEAF1 10.2.1.0/31  
+SPINE1-LEAF2 10.2.1.2/31  
+SPINE1-LEAF3 10.2.1.4/31  
+SPINE2-LEAF1 10.2.2.0/31  
+SPINE2-LEAF2 10.2.2.2/31  
+SPINE2-LEAF3 10.2.2.4/31 
 
