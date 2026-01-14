@@ -6,19 +6,19 @@ II: Распределить адресное пространство для б
 
 III: Зафиксировать в документации план работ, адресное пространство, схему сети, настройки
 
-Схема сети
+#Схема сети
 <img width="736" height="492" alt="image" src="https://github.com/user-attachments/assets/7a1e447c-6c3d-419b-ae9b-769594d80846" />
 
-Адресное пространство:
+# Адресное пространство:
 
-interfaces Loopback:
+## interfaces Loopback:
 SPINE1 10.0.1.1/32
 SPINE2 10.0.1.2/32
 leaf1 10.1.1.1/32
 leaf2 10.1.1.2/32
 leaf3 10.1.1.3/32
 
-P2P 
+## P2P 
 SPINE1-LEAF1 10.2.1.0/31
 SPINE1-LEAF2 10.2.1.2/31
 SPINE1-LEAF3 10.2.1.4/31
@@ -26,8 +26,8 @@ SPINE2-LEAF1 10.2.2.0/31
 SPINE2-LEAF2 10.2.2.2/31
 SPINE2-LEAF3 10.2.2.4/31
 
-Настройки и проверка связности:
-Spine 1
+# Настройки и проверка связности:
+## Spine 1
 
 interface Ethernet1
    no switchport
@@ -44,8 +44,8 @@ interface Ethernet3
 interface Loopback0
    ip address 10.0.1.1/32
 
-   checking 
-    to leaf1
+  ## checking 
+  ###  to leaf1
    SPINE1#ping 10.2.1.1
 PING 10.2.1.1 (10.2.1.1) 72(100) bytes of data.
 80 bytes from 10.2.1.1: icmp_seq=1 ttl=64 time=241 ms
@@ -58,7 +58,7 @@ PING 10.2.1.1 (10.2.1.1) 72(100) bytes of data.
 5 packets transmitted, 5 received, 0% packet loss, time 61ms
 rtt min/avg/max/mdev = 209.333/228.782/241.236/10.634 ms, pipe 5, ipg/ewma 15.274/234.278 ms
     
-    to leaf2
+  ###  to leaf2
 
     SPINE1#ping 10.2.1.3
 PING 10.2.1.3 (10.2.1.3) 72(100) bytes of data.
@@ -72,7 +72,7 @@ PING 10.2.1.3 (10.2.1.3) 72(100) bytes of data.
 5 packets transmitted, 5 received, 0% packet loss, time 70ms
 rtt min/avg/max/mdev = 14.143/23.675/36.212/8.872 ms, pipe 2, ipg/ewma 17.513/20.369 ms
 
-to leaf3
+### to leaf3
 
 SPINE1#ping 10.2.1.5
 PING 10.2.1.5 (10.2.1.5) 72(100) bytes of data.
@@ -86,7 +86,7 @@ PING 10.2.1.5 (10.2.1.5) 72(100) bytes of data.
 5 packets transmitted, 5 received, 0% packet loss, time 50ms
 rtt min/avg/max/mdev = 59.059/69.391/80.304/7.499 ms, pipe 5, ipg/ewma 12.698/74.313 ms
 
-Spine 2
+## Spine 2
 hostname SPINE2
 !
 interface Ethernet1
@@ -104,8 +104,8 @@ interface Ethernet3
 interface Loopback0
    ip address 10.0.1.2/32
 !
-checking
-to leaf1
+## checking
+### to leaf1
 
 SPINE2#ping 10.2.2.1
 PING 10.2.2.1 (10.2.2.1) 72(100) bytes of data.
