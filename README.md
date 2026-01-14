@@ -118,7 +118,7 @@ PING 10.2.2.1 (10.2.2.1) 72(100) bytes of data.
 --- 10.2.2.1 ping statistics ---
 5 packets transmitted, 5 received, 0% packet loss, time 53ms
 rtt min/avg/max/mdev = 51.784/62.621/75.785/7.854 ms, pipe 5, ipg/ewma 13.450/68.687 ms
-to leaf2
+## to leaf2
 SPINE2#ping 10.2.2.3
 PING 10.2.2.3 (10.2.2.3) 72(100) bytes of data.
 80 bytes from 10.2.2.3: icmp_seq=1 ttl=64 time=47.1 ms
@@ -130,7 +130,8 @@ PING 10.2.2.3 (10.2.2.3) 72(100) bytes of data.
 --- 10.2.2.3 ping statistics ---
 5 packets transmitted, 5 received, 0% packet loss, time 82ms
 rtt min/avg/max/mdev = 10.161/31.470/47.138/12.394 ms, pipe 4, ipg/ewma 20.678/38.396 ms
-to leaf3
+
+## to leaf3
 SPINE2#ping 10.2.2.5
 PING 10.2.2.5 (10.2.2.5) 72(100) bytes of data.
 80 bytes from 10.2.2.5: icmp_seq=1 ttl=64 time=36.7 ms
@@ -143,7 +144,7 @@ PING 10.2.2.5 (10.2.2.5) 72(100) bytes of data.
 5 packets transmitted, 5 received, 0% packet loss, time 72ms
 rtt min/avg/max/mdev = 12.176/23.990/36.739/8.068 ms, pipe 4, ipg/ewma 18.206/29.810 ms
 
-LEAF1
+# LEAF1
 
 !
 hostname LEAF1
@@ -159,8 +160,8 @@ interface Ethernet3
 interface Loopback0
    ip address 10.1.1.1/32
 
-CHEKING
-TO SPINE 2
+## CHEKING
+### TO SPINE 2
 LEAF1#ping 10.2.2.0
 PING 10.2.2.0 (10.2.2.0) 72(100) bytes of data.
 80 bytes from 10.2.2.0: icmp_seq=1 ttl=64 time=11.4 ms
@@ -172,7 +173,7 @@ PING 10.2.2.0 (10.2.2.0) 72(100) bytes of data.
 --- 10.2.2.0 ping statistics ---
 5 packets transmitted, 5 received, 0% packet loss, time 52ms
 rtt min/avg/max/mdev = 8.100/10.046/12.834/1.837 ms, pipe 2, ipg/ewma 13.068/10.702 ms
-TO SPINE 1
+### TO SPINE 1
 LEAF1#ping 10.2.1.0
 PING 10.2.1.0 (10.2.1.0) 72(100) bytes of data.
 80 bytes from 10.2.1.0: icmp_seq=1 ttl=64 time=19.0 ms
@@ -185,7 +186,7 @@ PING 10.2.1.0 (10.2.1.0) 72(100) bytes of data.
 5 packets transmitted, 5 received, 0% packet loss, time 68ms
 rtt min/avg/max/mdev = 12.496/17.007/19.130/2.513 ms, pipe 2, ipg/ewma 17.245/18.012 ms
 
-leaf2
+# leaf2
 hostname LEAF2
 !
 interface Ethernet1
@@ -199,8 +200,8 @@ interface Ethernet2
 interface Loopback0
    ip address 10.1.1.2/32
 !
-CHEKING
-TO SPINE1
+## CHEKING
+### TO SPINE1
 LEAF2#ping  10.2.1.2
 PING 10.2.1.2 (10.2.1.2) 72(100) bytes of data.
 80 bytes from 10.2.1.2: icmp_seq=1 ttl=64 time=11.2 ms
@@ -212,7 +213,7 @@ PING 10.2.1.2 (10.2.1.2) 72(100) bytes of data.
 --- 10.2.1.2 ping statistics ---
 5 packets transmitted, 5 received, 0% packet loss, time 63ms
 rtt min/avg/max/mdev = 7.537/9.291/11.209/1.469 ms, ipg/ewma 15.788/10.225 ms
-TO SPINE2
+### TO SPINE2
 LEAF2#ping 10.2.2.2
 PING 10.2.2.2 (10.2.2.2) 72(100) bytes of data.
 80 bytes from 10.2.2.2: icmp_seq=1 ttl=64 time=10.1 ms
@@ -225,7 +226,7 @@ PING 10.2.2.2 (10.2.2.2) 72(100) bytes of data.
 5 packets transmitted, 5 received, 0% packet loss, time 46ms
 rtt min/avg/max/mdev = 6.118/8.218/10.382/1.818 ms, ipg/ewma 11.544/9.268 ms
 
-LEAF3
+# LEAF3
 
 hostname LEAF3
 !
@@ -240,8 +241,8 @@ interface Ethernet2
 interface Loopback0
    ip address 10.1.1.3/32
 !
-CHEKING
-TO SPINE1
+## CHEKING
+### TO SPINE1
 LEAF3#ping 10.2.1.4
 PING 10.2.1.4 (10.2.1.4) 72(100) bytes of data.
 80 bytes from 10.2.1.4: icmp_seq=1 ttl=64 time=15.6 ms
@@ -253,7 +254,7 @@ PING 10.2.1.4 (10.2.1.4) 72(100) bytes of data.
 --- 10.2.1.4 ping statistics ---
 5 packets transmitted, 5 received, 0% packet loss, time 58ms
 rtt min/avg/max/mdev = 8.110/11.384/15.642/2.829 ms, pipe 2, ipg/ewma 14.562/13.323 ms
-TO SPINE2
+### TO SPINE2
 LEAF3#ping 10.2.2.4
 PING 10.2.2.4 (10.2.2.4) 72(100) bytes of data.
 80 bytes from 10.2.2.4: icmp_seq=1 ttl=64 time=10.5 ms
