@@ -22,7 +22,7 @@
 
 ### Clients Network
 ### CL1 Router NORMAL AREA 
-#### <img width="595" height="726" alt="image" src="https://github.com/user-attachments/assets/be538199-addc-48fb-8b01-5e5f210644b6" />
+#### <img width="625" height="725" alt="image" src="https://github.com/user-attachments/assets/b4889443-916b-45f9-8077-a3a1f3115d94" />
 
 #### routing tables
 #### img width="550" height="498" alt="image" src="https://github.com/user-attachments/assets/29a9288e-870e-47b2-9908-90457ffd8727" />
