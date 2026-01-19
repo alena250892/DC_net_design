@@ -9,8 +9,8 @@
 <img width="651" height="633" alt="image" src="https://github.com/user-attachments/assets/eff47fcd-bb6a-43b2-b05a-1ad04f8531f4" />
 
 ### LEAF 1
-<img width="298" height="147" alt="image" src="https://github.com/user-attachments/assets/4da04e95-3074-4172-b77c-0b59dace6ccf" />
-<img width="692" height="825" alt="image" src="https://github.com/user-attachments/assets/6dbccfb4-9cf5-47da-92ac-872809573d0c" />
+#### <img width="298" height="147" alt="image" src="https://github.com/user-attachments/assets/4da04e95-3074-4172-b77c-0b59dace6ccf" />
+#### <img width="692" height="825" alt="image" src="https://github.com/user-attachments/assets/6dbccfb4-9cf5-47da-92ac-872809573d0c" />
 
 ### LEAF 2
 <img width="480" height="189" alt="image" src="https://github.com/user-attachments/assets/ed1b2ae3-2ec5-4c4d-9191-47c6e9588127" />
