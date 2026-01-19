@@ -3,45 +3,45 @@
 <img width="1322" height="642" alt="image" src="https://github.com/user-attachments/assets/86ba29ff-6bfe-4502-950a-aae32e64eac0" />
 ## Backbone AREA 0.0.0.0
 ### Spine 1
-router ospf 1010
-   router-id 10.0.1.1
-   passive-interface default
-   no passive-interface Ethernet1
-   no passive-interface Ethernet2
-   no passive-interface Ethernet3
-   network 10.0.1.1/32 area 0.0.0.0
-   network 10.2.1.0/31 area 0.0.0.0
-   network 10.2.1.2/31 area 0.0.0.0
-   network 10.2.1.4/31 area 0.0.0.0
-   max-lsa 12000
+<img width="625" height="651" alt="image" src="https://github.com/user-attachments/assets/b475d6d9-0de6-4bb0-a083-3c14804a8ce7" />
+### Spine 2  
 
-SPINE1#sh ip ospf database
+<img width="651" height="633" alt="image" src="https://github.com/user-attachments/assets/eff47fcd-bb6a-43b2-b05a-1ad04f8531f4" />
 
-            OSPF Router with ID(10.0.1.1) (Instance ID 1010) (VRF default)
+### LEAF 1
+<img width="298" height="147" alt="image" src="https://github.com/user-attachments/assets/4da04e95-3074-4172-b77c-0b59dace6ccf" />
+<img width="692" height="825" alt="image" src="https://github.com/user-attachments/assets/6dbccfb4-9cf5-47da-92ac-872809573d0c" />
+
+### LEAF 2
+<img width="480" height="189" alt="image" src="https://github.com/user-attachments/assets/ed1b2ae3-2ec5-4c4d-9191-47c6e9588127" />
+<img width="547" height="872" alt="image" src="https://github.com/user-attachments/assets/8e8b884e-b9fa-4741-87ca-be65dbc3f745" />
+
+### LEAF 3
+<img width="619" height="844" alt="image" src="https://github.com/user-attachments/assets/d9bb7040-54b2-40fd-93d5-3f3e74b8d2eb" />
 
 
-                 Router Link States (Area 0.0.0.0)
+### Clients Network
+### CL1 Router NORMAL AREA 
+<img width="595" height="726" alt="image" src="https://github.com/user-attachments/assets/be538199-addc-48fb-8b01-5e5f210644b6" />
 
-Link ID         ADV Router      Age         Seq#         Checksum Link count
-10.1.1.1        10.1.1.1        1735        0x800008c0   0x97c    5
-10.0.2.1        10.0.2.1        1784        0x80000a53   0x5332   7
-10.0.1.1        10.0.1.1        1726        0x80000a97   0xf457   7
-10.1.1.2        10.1.1.2        1738        0x80000763   0x6076   5
-10.1.1.3        10.1.1.3        1769        0x800006f4   0x85b7   5
+#### routing tables
+<img width="550" height="498" alt="image" src="https://github.com/user-attachments/assets/29a9288e-870e-47b2-9908-90457ffd8727" />
 
-                 Summary Link States (Area 0.0.0.0)
 
-Link ID         ADV Router      Age         Seq#         Checksum
-192.168.4.0     10.1.1.3        1829        0x80000026   0xaed8
-192.168.3.0     10.1.1.3        1829        0x80000023   0xbfcb
-192.168.2.0     10.1.1.2        1618        0x80000022   0xd2bb
-192.168.1.0     10.1.1.1        1135        0x8000000c   0x1096
-10.3.1.4        10.1.1.3        1289        0x80000069   0xc1e8
-10.3.1.0        10.1.1.1        1135        0x80000016   0x9c67
-10.3.1.6        10.1.1.3        1289        0x80000069   0xadfa
-10.3.1.2        10.1.1.2        1318        0x800000b2   0x491b
+### CL2 Router NSSA AREA
+<img width="633" height="672" alt="image" src="https://github.com/user-attachments/assets/97336e9d-35c7-476c-998f-2463943ceaa2" />
 
-                 Type-5 AS External Link States
+#### routing tables
+<img width="598" height="560" alt="image" src="https://github.com/user-attachments/assets/4045240e-4bac-4900-b9d7-2d4f3c209249" />
 
-Link ID         ADV Router      Age         Seq#         Checksum Tag
-8.8.8.8         10.0.2.1        1664        0x80000011   0x570    0
+### CL3 Router TOTALY STUB AREA
+<img width="629" height="350" alt="image" src="https://github.com/user-attachments/assets/277b87c0-8621-4ea0-875d-a2375b961038" />
+
+#### routing tables
+<img width="593" height="303" alt="image" src="https://github.com/user-attachments/assets/c3305e51-2a43-4ae7-9931-d877b40135b9" />
+
+### CL4 Router TOTALY STUB AREA
+<img width="660" height="366" alt="image" src="https://github.com/user-attachments/assets/c7303f97-3836-4a0f-b931-fedd65c813df" />
+
+#### routing tables
+<img width="517" height="313" alt="image" src="https://github.com/user-attachments/assets/c2dffc79-cc40-4df0-9106-696e2aa50c5a" />
