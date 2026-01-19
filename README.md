@@ -25,7 +25,7 @@
 #### <img width="625" height="725" alt="image" src="https://github.com/user-attachments/assets/b4889443-916b-45f9-8077-a3a1f3115d94" />
 
 #### routing tables
-#### img width="550" height="498" alt="image" src="https://github.com/user-attachments/assets/29a9288e-870e-47b2-9908-90457ffd8727" />
+#### <img width="550" height="498" alt="image" src="https://github.com/user-attachments/assets/29a9288e-870e-47b2-9908-90457ffd8727" />
 
 
 ### CL2 Router NSSA AREA
@@ -35,7 +35,7 @@
 #### <img width="598" height="560" alt="image" src="https://github.com/user-attachments/assets/4045240e-4bac-4900-b9d7-2d4f3c209249" />
 
 ### CL3 Router TOTALY STUB AREA
-#### img width="629" height="350" alt="image" src="https://github.com/user-attachments/assets/277b87c0-8621-4ea0-875d-a2375b961038" />
+#### <img width="629" height="350" alt="image" src="https://github.com/user-attachments/assets/277b87c0-8621-4ea0-875d-a2375b961038" />
 
 #### routing tables
 #### <img width="593" height="303" alt="image" src="https://github.com/user-attachments/assets/c3305e51-2a43-4ae7-9931-d877b40135b9" />
