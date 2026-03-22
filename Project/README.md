@@ -207,9 +207,8 @@ router bgp 65002
          redistribute connected
 !
 end
-
-</details>
 ```bash
+</details>
 
 
 ##### ⋅⋅*Настройка оборудования ЦОД2
