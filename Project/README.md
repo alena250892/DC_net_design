@@ -73,8 +73,8 @@
 ## 2. Схема сети
 ### <img width="865" height="643" alt="image" src="https://github.com/user-attachments/assets/7b016234-fc1d-4b15-91da-3c30e38368ce" />
 #### 3. Настройка Underlay EBGP
-##### ⋅⋅*Настройка оборудования ЦОД1
-..* Leaf1_1
+##### ⋅⋅* Настройка оборудования ЦОД1
+
 <details>
 <summary>Конфигурация Leaf1_2</summary>
 
@@ -206,7 +206,9 @@ router bgp 65002
       address-family ipv4
          redistribute connected
 !
-end </details>
+end
+
+</details>
 
 ##### ⋅⋅*Настройка оборудования ЦОД2
 ##### ⋅⋅*Настройка Border Leaf для связности между l2 сегментами ЦОДов
