@@ -207,8 +207,11 @@ router bgp 65002
          redistribute connected
 !
 end
-```bash
+```markdown
+end
 </details>
+
+
 
 
 ##### ⋅⋅*Настройка оборудования ЦОД2
