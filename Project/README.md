@@ -206,8 +206,7 @@ router bgp 65002
       address-family ipv4
          redistribute connected
 !
-end
-</details>
+end </details>
 
 ##### ⋅⋅*Настройка оборудования ЦОД2
 ##### ⋅⋅*Настройка Border Leaf для связности между l2 сегментами ЦОДов
