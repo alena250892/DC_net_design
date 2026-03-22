@@ -71,7 +71,7 @@
 |------|----------|
 | VRF1 | 111111   |
 ## 2. Схема сети
-<img width="865" height="643" alt="image" src="https://github.com/user-attachments/assets/7b016234-fc1d-4b15-91da-3c30e38368ce" />
+### <img width="865" height="643" alt="image" src="https://github.com/user-attachments/assets/7b016234-fc1d-4b15-91da-3c30e38368ce" />
 #### 3. Настройка Underlay EBGP
 ##### ⋅⋅* Настройка оборудования ЦОД1
 ##### ⋅⋅* Настройка оборудования ЦОД2
