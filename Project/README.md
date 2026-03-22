@@ -73,7 +73,8 @@
 ## 2. Схема сети
 ### <img width="865" height="643" alt="image" src="https://github.com/user-attachments/assets/7b016234-fc1d-4b15-91da-3c30e38368ce" />
 #### 3. Настройка Underlay EBGP
-##### ⋅⋅* Настройка оборудования ЦОД1
+#### 4. Настройка Overlay VXLAN EVPN
+##### ⋅⋅*Настройка оборудования ЦОД1
 
 <details>
 <summary>Конфигурация Leaf1_2</summary>
@@ -207,14 +208,9 @@ router bgp 65002
          redistribute connected
 !
 end
-```markdown
-end
+
 </details>
-
-
-
-
-##### ⋅⋅*Настройка оборудования ЦОД2
+⋅⋅*Настройка оборудования ЦОД2
 ##### ⋅⋅*Настройка Border Leaf для связности между l2 сегментами ЦОДов
 1. настраиваем ebgp сессию между p2p линками. У меня линки собраны в Port-channel и интерфейсу дан адрес
 ## <img width="267" height="86" alt="изображение" src="https://github.com/user-attachments/assets/96b5a3c5-5534-4ef1-ad75-d102354baac3" />
