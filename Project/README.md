@@ -74,6 +74,141 @@
 ### <img width="865" height="643" alt="image" src="https://github.com/user-attachments/assets/7b016234-fc1d-4b15-91da-3c30e38368ce" />
 #### 3. Настройка Underlay EBGP
 ##### ⋅⋅*Настройка оборудования ЦОД1
+..* Leaf1_1
+<details>
+<summary>Конфигурация Leaf1_2</summary>
+
+```bash Leaf1_2#sh run
+! Command: show running-config
+! device: Leaf1-2 (vEOS-lab, EOS-4.29.2F)
+!
+! boot system flash:/vEOS-lab.swi
+!
+no aaa root
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model multi-agent
+!
+hostname Leaf1_2
+!
+spanning-tree mode mstp
+no spanning-tree vlan-id 1-4094
+!
+vlan 10
+   name TENANT-A
+!
+vrf instance VRF1
+!
+interface Port-Channel10
+   description ESI-LAG-to-CLIENT
+   switchport trunk allowed vlan 10
+   switchport mode trunk
+   !
+   evpn ethernet-segment
+      identifier 0000:0000:0001:0012:000a
+      route-target import 00:00:00:01:12:0a
+   lacp system-id 0201.0012.000a
+!
+interface Ethernet1
+   description to-SPINE1_1
+   mtu 9000
+   no switchport
+   ip address 10.0.1.3/31
+   spanning-tree link-type point-to-point
+!
+interface Ethernet2
+   description to-SPINE1_2
+   mtu 9000
+   no switchport
+   ip address 10.0.1.7/31
+   spanning-tree link-type point-to-point
+!
+interface Ethernet3
+   no switchport
+!
+interface Ethernet4
+!
+interface Ethernet5
+   description to-CLIENT
+   switchport trunk allowed vlan 10
+   switchport mode trunk
+   channel-group 10 mode active
+!
+interface Ethernet6
+!
+interface Ethernet7
+!
+interface Ethernet8
+   switchport access vlan 10
+!
+interface Loopback0
+   ip address 10.1.2.1/32
+!
+interface Management1
+!
+interface Vlan10
+   description TEST-VXLAN
+   vrf VRF1
+   ip address 192.168.1.3/24
+   ip virtual-router address 192.168.1.1
+!
+interface Vxlan1
+   vxlan source-interface Loopback0
+   vxlan udp-port 4789
+   vxlan vlan 10 vni 10010
+   vxlan vrf VRF1 vni 111111
+   vxlan learn-restrict any
+!
+ip virtual-router mac-address 02:00:00:00:00:00
+ip virtual-router address subnet-routes
+!
+ip routing
+ip routing vrf VRF1
+!
+router bgp 65002
+   router-id 10.1.2.1
+   maximum-paths 2 ecmp 2
+   neighbor OVER peer group
+   neighbor OVER remote-as 65000
+   neighbor OVER update-source Loopback0
+   neighbor OVER ebgp-multihop 3
+   neighbor OVER send-community standard extended
+   neighbor UNDER peer group
+   neighbor UNDER remote-as 65000
+   neighbor 10.0.1.2 peer group UNDER
+   neighbor 10.0.1.2 description SPINE_1_1_p2p
+   neighbor 10.0.1.6 peer group UNDER
+   neighbor 10.0.1.6 description SPINE_1_2_p2p
+   neighbor 10.10.1.1 peer group OVER
+   neighbor 10.10.1.1 description SPINE_1_1_lo
+   neighbor 10.10.2.1 peer group OVER
+   neighbor 10.10.2.1 description SPINE_1_2_lo
+   redistribute connected
+   !
+   vlan 10
+      rd auto
+      route-target both 10:10010
+      redistribute learned
+   !
+   address-family evpn
+      neighbor OVER activate
+   !
+   address-family ipv4
+      neighbor UNDER activate
+   !
+   vrf VRF1
+      rd 65002:1
+      route-target import evpn 1:111111
+      route-target export evpn 1:111111
+      redistribute connected
+      !
+      address-family ipv4
+         redistribute connected
+!
+end
+
+
 ##### ⋅⋅*Настройка оборудования ЦОД2
 ##### ⋅⋅*Настройка Border Leaf для связности между l2 сегментами ЦОДов
 1. настраиваем ebgp сессию между p2p линками. У меня линки собраны в Port-channel и интерфейсу дан адрес
