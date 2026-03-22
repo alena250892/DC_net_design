@@ -73,22 +73,38 @@
 ## 2. Схема сети
 ### <img width="865" height="643" alt="image" src="https://github.com/user-attachments/assets/7b016234-fc1d-4b15-91da-3c30e38368ce" />
 #### 3. Настройка Underlay EBGP
-##### ⋅⋅* Настройка оборудования ЦОД1
-##### ⋅⋅* Настройка оборудования ЦОД2
-##### ⋅⋅* Настройка Border Leaf для связности между l2 сегментами ЦОДов
+##### ⋅⋅*Настройка оборудования ЦОД1
+##### ⋅⋅*Настройка оборудования ЦОД2
+##### ⋅⋅*Настройка Border Leaf для связности между l2 сегментами ЦОДов
 1. настраиваем ebgp сессию между p2p линками. У меня линки собраны в Port-channel и интерфейсу дан адрес
 ## <img width="267" height="86" alt="изображение" src="https://github.com/user-attachments/assets/96b5a3c5-5534-4ef1-ad75-d102354baac3" />
 2. настраиваем evpn сессию между loopback 2х бордеров 
-..* В общей таблице bgp создаем соседей и активируем их в  address-family evpn
+..*В общей таблице bgp создаем соседей и активируем их в  address-family evpn
 ### <img width="484" height="756" alt="изображение" src="https://github.com/user-attachments/assets/b33d3082-f918-4753-a35d-da84e9ed6c71" />
 3. Создаем общий vni для передачи префиксов из соседнего POD
-..* объявить на обоих бордерах vlan из соседнего POD
-..* создать vrf instance VRF1, включить маршрутизацию ip routing vrf VRF1, опустить VRF в нужный vlan (внимательно, т.к. собъются прежние настройки интерфейса), добавить VRF в BGP
+..*объявить на обоих бордерах vlan из соседнего POD
+..*создать vrf instance VRF1, включить маршрутизацию ip routing vrf VRF1, опустить VRF в нужный vlan (внимательно, т.к. собъются прежние настройки интерфейса), добавить VRF в BGP
 ### <img width="205" height="40" alt="изображение" src="https://github.com/user-attachments/assets/880b2b1a-5024-4eef-806e-07d072b01d45" />
 ### <img width="318" height="79" alt="изображение" src="https://github.com/user-attachments/assets/1381a73d-3e6b-42d9-afc2-7a2ae789687c" />
 ### <img width="301" height="154" alt="изображение" src="https://github.com/user-attachments/assets/c5d8a9fe-37b9-40e6-b0ee-d6f3bdec89ec" />
 ### <img width="617" height="936" alt="изображение" src="https://github.com/user-attachments/assets/a4cb9d9c-e9bf-4627-8429-6014eda479a6" />
 *** если ранее на leaf не был добавлен общий vni - необходимо добавить
+### CHECKING
+..*проверка связности сегментов
+#### первые пинги, ожидаемо, проходят не уверенно
+### <img width="552" height="452" alt="изображение" src="https://github.com/user-attachments/assets/c7ab68fc-5371-45cb-9613-9d30406844d4" />
+#### но затем маршруты 3 типа появляются в таблицах коммутаторов, а на PC появляется арп запись и все идет стабильно:
+### <img width="623" height="236" alt="изображение" src="https://github.com/user-attachments/assets/c74cf671-bb4c-4f10-9d5f-9533219fc72e" />
+..*посмотреть что видно vtep соседнего POD
+###
+..*посмотреть маршруты типа 3
+###
+..*посмотреть маршруты типа 2
+###
+..*посмотреть маршруты для vrf
+###
+
+
 
 #### 5. Настройка Multihoming ethernet сегмента в ЦОД 1
 #### 6. Настройка инкапсуляции маршрута от EBGP соседа в фабрику
