@@ -90,20 +90,20 @@
 ### <img width="617" height="936" alt="изображение" src="https://github.com/user-attachments/assets/a4cb9d9c-e9bf-4627-8429-6014eda479a6" />
 *** если ранее на leaf не был добавлен общий vni - необходимо добавить
 ### CHECKING
-..*проверка связности сегментов
+..* проверка связности сегментов
 #### первые пинги, ожидаемо, проходят не уверенно
 ### <img width="552" height="452" alt="изображение" src="https://github.com/user-attachments/assets/c7ab68fc-5371-45cb-9613-9d30406844d4" />
 #### но затем маршруты 3 типа появляются в таблицах коммутаторов, а на PC появляется арп запись и все идет стабильно:
 ### <img width="623" height="236" alt="изображение" src="https://github.com/user-attachments/assets/c74cf671-bb4c-4f10-9d5f-9533219fc72e" />
-..*посмотреть что видно vtep соседнего POD
+..* посмотреть что видно vtep соседнего POD
+### <img width="315" height="180" alt="изображение" src="https://github.com/user-attachments/assets/49e02564-3da3-4678-ad76-4f60b5a535a0" />
+..* посмотреть маршруты типа 3
 ###
-..*посмотреть маршруты типа 3
+..* посмотреть маршруты типа 2
+### <img width="849" height="486" alt="изображение" src="https://github.com/user-attachments/assets/a8b66728-8cdf-4cba-a70c-ccbf224cd187" />
+..* посмотреть маршруты для vrf
 ###
-..*посмотреть маршруты типа 2
-###
-..*посмотреть маршруты для vrf
-###
-
+..* проверить что l3vni есть
 
 
 #### 5. Настройка Multihoming ethernet сегмента в ЦОД 1
@@ -124,6 +124,12 @@
 ### <img width="1046" height="363" alt="изображение" src="https://github.com/user-attachments/assets/ab7f1c3a-47bf-4086-8a83-355b420073ce" />
 ### посмотреть что vlan попадают в нужный vrf 
 ### <img width="599" height="97" alt="изображение" src="https://github.com/user-attachments/assets/8263b898-0abd-460d-9d9e-ca887e45f217" />
+
+### посмотреть что устройства попадают в нужный vlan и vxlan
+sh mac-address-table
+### проверить что объявленный vlan попадает в нужный vni
+### <img width="547" height="169" alt="изображение" src="https://github.com/user-attachments/assets/bcbab6b2-4980-4117-88e7-0ecd55cf319e" />
+
 
 
 
