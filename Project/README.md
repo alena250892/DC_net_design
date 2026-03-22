@@ -208,7 +208,6 @@ router bgp 65002
          redistribute connected
 !
 end
-
 </details>
 
 
