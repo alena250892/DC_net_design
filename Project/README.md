@@ -208,12 +208,11 @@ router bgp 65002
          redistribute connected
 !
 end
+```
 </details>
-___
 
-
-* Настройка оборудования ЦОД2
-##### ⋅⋅*Настройка Border Leaf для связности между l2 сегментами ЦОДов
+## Настройка оборудования ЦОД2
+### ⋅⋅*Настройка Border Leaf для связности между l2 сегментами ЦОДов
 1. настраиваем ebgp сессию между p2p линками. У меня линки собраны в Port-channel и интерфейсу дан адрес
 ## <img width="267" height="86" alt="изображение" src="https://github.com/user-attachments/assets/96b5a3c5-5534-4ef1-ad75-d102354baac3" />
 2. настраиваем evpn сессию между loopback 2х бордеров 
@@ -267,7 +266,4 @@ ___
 sh mac-address-table
 ### проверить что объявленный vlan попадает в нужный vni
 ### <img width="547" height="169" alt="изображение" src="https://github.com/user-attachments/assets/bcbab6b2-4980-4117-88e7-0ecd55cf319e" />
-
-
-
 
