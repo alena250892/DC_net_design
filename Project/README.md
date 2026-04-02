@@ -1,4 +1,4 @@
-## Проектирование сетевой фабрики на основе VxLAN EVPN.
+<img width="1762" height="669" alt="image" src="https://github.com/user-attachments/assets/86c62375-ee5a-4660-b06a-cede0b434cb4" />## Проектирование сетевой фабрики на основе VxLAN EVPN.
 
 ### План работ:
 #### 1. [Составление IP плана сети](#-ip-план-фабрики)
@@ -72,6 +72,9 @@
 | VRF1 | 111111   |
 ## 2. Схема сети
 ### <img width="865" height="643" alt="image" src="https://github.com/user-attachments/assets/7b016234-fc1d-4b15-91da-3c30e38368ce" />
+
+### <img width="1762" height="669" alt="image" src="https://github.com/user-attachments/assets/ed9b3a92-607f-40c6-afeb-afee7c3142c2" />
+
 #### 3. Настройка Underlay EBGP
 ## Нумерация AS (Автономных систем)
 
@@ -143,6 +146,94 @@ show vxlan vtep
 <summary>Конфигурация Spine1_1</summary>
 
 ```bash
+Spine1_1#sh run
+! Command: show running-config
+! device: Spine1-1 (vEOS-lab, EOS-4.29.2F)
+!
+! boot system flash:/vEOS-lab.swi
+!
+no aaa root
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model multi-agent
+!
+hostname Spine1_1
+!
+spanning-tree mode mstp
+no spanning-tree vlan-id 4094
+!
+interface Ethernet1
+   description to-LEAF1_1
+   mtu 9000
+   no switchport
+   ip address 10.0.1.0/31
+   spanning-tree link-type point-to-point
+!
+interface Ethernet2
+   description to-LEAF1_2
+   mtu 9000
+   no switchport
+   ip address 10.0.1.2/31
+   spanning-tree link-type point-to-point
+!
+interface Ethernet3
+   description to-BORDERLEAF-1
+   mtu 9000
+   no switchport
+   ip address 10.0.1.8/31
+   spanning-tree link-type point-to-point
+!
+interface Ethernet4
+   no switchport
+!
+interface Ethernet5
+   no switchport
+!
+interface Ethernet6
+!
+interface Ethernet7
+!
+interface Ethernet8
+!
+interface Loopback0
+   ip address 10.10.1.1/32
+!
+interface Management1
+!
+ip routing
+!
+router bgp 65000
+   router-id 10.10.1.1
+   maximum-paths 4 ecmp 4
+   neighbor OVER peer group
+   neighbor OVER next-hop-unchanged
+   neighbor OVER update-source Loopback0
+   neighbor OVER ebgp-multihop 4
+   neighbor OVER send-community extended
+   neighbor UNDER peer group
+   neighbor UNDER send-community extended
+   neighbor 10.0.1.1 peer group UNDER
+   neighbor 10.0.1.1 remote-as 65001
+   neighbor 10.0.1.3 peer group UNDER
+   neighbor 10.0.1.3 remote-as 65002
+   neighbor 10.0.1.9 peer group UNDER
+   neighbor 10.0.1.9 remote-as 65003
+   neighbor 10.1.1.1 peer group OVER
+   neighbor 10.1.1.1 remote-as 65001
+   neighbor 10.1.2.1 peer group OVER
+   neighbor 10.1.2.1 remote-as 65002
+   neighbor 10.1.10.1 peer group OVER
+   neighbor 10.1.10.1 remote-as 65003
+   redistribute connected
+   !
+   address-family evpn
+      neighbor OVER activate
+   !
+   address-family ipv4
+      neighbor UNDER activate
+!
+end
 
 ```
 </details>
@@ -152,6 +243,97 @@ show vxlan vtep
 <summary>Конфигурация Spine1_2</summary>
 
 ```bash
+Spine1_2#sh run
+! Command: show running-config
+! device: Spine1-2 (vEOS-lab, EOS-4.29.2F)
+!
+! boot system flash:/vEOS-lab.swi
+!
+no aaa root
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model multi-agent
+!
+hostname Spine1_2
+!
+spanning-tree mode mstp
+no spanning-tree vlan-id 4094
+!
+interface Ethernet1
+   description to-LEAF1_1
+   mtu 9000
+   no switchport
+   ip address 10.0.1.4/31
+   spanning-tree link-type point-to-point
+!
+interface Ethernet2
+   description to-LEAF1_2
+   mtu 9000
+   no switchport
+   ip address 10.0.1.6/31
+   spanning-tree link-type point-to-point
+!
+interface Ethernet3
+   description to-BORDERLEAF-1
+   mtu 9000
+   no switchport
+   ip address 10.0.1.10/31
+   spanning-tree link-type point-to-point
+!
+interface Ethernet4
+   no switchport
+!
+interface Ethernet5
+!
+interface Ethernet6
+!
+interface Ethernet7
+!
+interface Ethernet8
+!
+interface Loopback0
+   ip address 10.10.2.1/32
+!
+interface Management1
+!
+interface Vlan4094
+   description MLAG_PEER_VLAN
+   ip address 172.20.2.2/30
+!
+ip routing
+!
+router bgp 65000
+   router-id 10.10.2.1
+   maximum-paths 4 ecmp 4
+   neighbor OVER peer group
+   neighbor OVER next-hop-unchanged
+   neighbor OVER update-source Loopback0
+   neighbor OVER ebgp-multihop 4
+   neighbor OVER send-community extended
+   neighbor UNDER peer group
+   neighbor UNDER send-community extended
+   neighbor 10.0.1.5 peer group UNDER
+   neighbor 10.0.1.5 remote-as 65001
+   neighbor 10.0.1.7 peer group UNDER
+   neighbor 10.0.1.7 remote-as 65002
+   neighbor 10.0.1.11 peer group UNDER
+   neighbor 10.0.1.11 remote-as 65003
+   neighbor 10.1.1.1 peer group OVER
+   neighbor 10.1.1.1 remote-as 65001
+   neighbor 10.1.2.1 peer group OVER
+   neighbor 10.1.2.1 remote-as 65002
+   neighbor 10.1.10.1 peer group OVER
+   neighbor 10.1.10.1 remote-as 65003
+   redistribute connected
+   !
+   address-family evpn
+      neighbor OVER activate
+   !
+   address-family ipv4
+      neighbor UNDER activate
+!
+end
 
 ```
 </details>
@@ -428,9 +610,6 @@ router bgp 65002
 end
 ```
 </details>
-
-
-
 
 
 ## Настройка оборудования ЦОД2
@@ -877,7 +1056,7 @@ end
 1. настраиваем ebgp сессию между p2p линками. У меня линки собраны в Port-channel и интерфейсу дан адрес
 ## <img width="267" height="86" alt="изображение" src="https://github.com/user-attachments/assets/96b5a3c5-5534-4ef1-ad75-d102354baac3" />
 2. настраиваем evpn сессию между loopback 2х бордеров 
-..* В общей таблице bgp создаем соседей и активируем их в  address-family evpn
+- в общей таблице bgp создаем соседей и активируем их в  address-family evpn
 ### <img width="484" height="756" alt="изображение" src="https://github.com/user-attachments/assets/b33d3082-f918-4753-a35d-da84e9ed6c71" />
 3. Создаем общий vni для передачи префиксов из соседнего POD
    
@@ -960,19 +1139,15 @@ interface Ethernet5
 ####show bgp evpn route-type mac-ip | include 0050.7966.6808
 ####
 
-#### 6. Настройка инкапсуляции маршрута от EBGP соседа в фабрику
 Проверка:
 
 Убедиться, что порт‑канал поднят и LACP активен:
-
-
 show port-channel summary
 show lacp interface Port-Channel10
 Проверить состояние Ethernet Segment:
 
 show bgp evpn instance
 Должно быть State: up и назначен Designated Forwarder.
-
 Проверить наличие Type‑4 маршрутов:
 
 bash
@@ -980,11 +1155,16 @@ show bgp evpn route-type ethernet-segment
 Проверить, что в Type‑2 маршрутах клиента указан ESI:
 
 bash
-show bgp evpn route-type mac-ip | include 0050.7966.6808я
+show bgp evpn route-type mac-ip | include 0050.7966.6808
 
+#### 6. Настройка инкапсуляции маршрута от EBGP соседа в фабрику
+1. Настроить P2P  интерфейсына обоих роутерах
+2. На обоих роутерах поднять SVI интерфейсы
+3. На роутере без EVPN - просто настраиваем eBGP сессию с соседом, lO поднят просто для примера, именно его мы будем инскапсулировать в фабрику
+#### <img width="407" height="323" alt="image" src="https://github.com/user-attachments/assets/8f6e0671-cb79-4137-8d45-9abe07b8ba66" />
+4. На BorderLeaf-1 поднятый SVI интерфейс необходимо добавить в VRF, объявить в BGP EVPN и доавить в BGP VRF адрес SVI соседа
+#### <img width="549" height="976" alt="image" src="https://github.com/user-attachments/assets/3d8ec976-ad33-404c-a3be-fa1281ff68c8" />
 
-
----
 ## 7. Траблшутинг сетевой связности между хостами в сетях 192.168.1.0/24 и 192.168.2.0/24
 ⋅⋅* проверка на всех задействованых узлах сессий eBGP и BGP EVPN
 <img width="917" height="276" alt="изображение" src="https://github.com/user-attachments/assets/91d3006f-c4e4-4c27-9c66-2259e4526957" />
@@ -992,8 +1172,6 @@ show bgp evpn route-type mac-ip | include 0050.7966.6808я
 Если сессия EVPN не установливается возможные ошибки:
 - правильность id на всех узлах
 - не доступен neighbor (если это p2p - проверить связность утилитой пинг, если это loopback - наличие маршрута в GRT)
-
-
 - проверить что маршрут попадает в нужный vrf
 ### посмотреть какие видно маршруты
 ### <img width="1046" height="363" alt="изображение" src="https://github.com/user-attachments/assets/ab7f1c3a-47bf-4086-8a83-355b420073ce" />
