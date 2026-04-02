@@ -439,6 +439,95 @@ end
 <summary>Конфигурация Spine2_1</summary>
 
 ```bash
+Spine2_1#sh run
+! Command: show running-config
+! device: Spine2-1 (vEOS-lab, EOS-4.29.2F)
+!
+! boot system flash:/vEOS-lab.swi
+!
+no aaa root
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model multi-agent
+!
+hostname Spine2_1
+!
+spanning-tree mode mstp
+!
+interface Ethernet1
+   description to-LEAF2_1
+   no switchport
+   ip address 10.0.2.0/31
+!
+interface Ethernet2
+   description to-LEAF2_2
+   no switchport
+   ip address 10.0.2.2/31
+!
+interface Ethernet3
+   description to-BORDERLEAF-2
+   no switchport
+   ip address 10.0.2.8/31
+!
+interface Ethernet4
+!
+interface Ethernet5
+!
+interface Ethernet6
+!
+interface Ethernet7
+!
+interface Ethernet8
+!
+interface Loopback0
+   ip address 10.20.1.1/32
+!
+interface Management1
+!
+ip routing
+!
+router bgp 65000
+   router-id 10.20.1.1
+   maximum-paths 4 ecmp 4
+   neighbor 10.0.2.1 remote-as 65021
+   neighbor 10.0.2.3 remote-as 65022
+   neighbor 10.0.2.9 remote-as 65023
+   neighbor 10.2.1.1 remote-as 65021
+   neighbor 10.2.1.1 update-source Loopback0
+   neighbor 10.2.1.1 ebgp-multihop 2
+   neighbor 10.2.1.1 route-reflector-client
+   neighbor 10.2.1.1 send-community extended
+   neighbor 10.2.2.1 remote-as 65022
+   neighbor 10.2.2.1 update-source Loopback0
+   neighbor 10.2.2.1 ebgp-multihop 2
+   neighbor 10.2.2.1 route-reflector-client
+   neighbor 10.2.2.1 send-community extended
+   neighbor 10.2.10.1 remote-as 65023
+   neighbor 10.2.10.1 update-source Loopback0
+   neighbor 10.2.10.1 ebgp-multihop 2
+   neighbor 10.2.10.1 route-reflector-client
+   neighbor 10.2.10.1 send-community extended
+   !
+   address-family evpn
+      neighbor 10.2.1.1 activate
+      neighbor 10.2.1.1 next-hop-unchanged
+      neighbor 10.2.2.1 activate
+      neighbor 10.2.2.1 next-hop-unchanged
+      neighbor 10.2.10.1 activate
+      neighbor 10.2.10.1 next-hop-unchanged
+   !
+   address-family ipv4
+      neighbor 10.0.2.1 activate
+      neighbor 10.0.2.3 activate
+      neighbor 10.0.2.9 activate
+      network 10.0.2.0/31
+      network 10.0.2.2/31
+      network 10.0.2.8/31
+      network 10.20.1.1/32
+!
+end
+
 
 ```
 </details>
@@ -448,6 +537,94 @@ end
 <summary>Конфигурация Spine2_2</summary>
 
 ```bash
+Spine2_2#sh run
+! Command: show running-config
+! device: Spine2-2 (vEOS-lab, EOS-4.29.2F)
+!
+! boot system flash:/vEOS-lab.swi
+!
+no aaa root
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model multi-agent
+!
+hostname Spine2_2
+!
+spanning-tree mode mstp
+!
+interface Ethernet1
+   description to-LEAF2_1
+   no switchport
+   ip address 10.0.2.4/31
+!
+interface Ethernet2
+   description to-LEAF2_2
+   no switchport
+   ip address 10.0.2.6/31
+!
+interface Ethernet3
+   description to-BORDERLEAF-2
+   no switchport
+   ip address 10.0.2.10/31
+!
+interface Ethernet4
+!
+interface Ethernet5
+!
+interface Ethernet6
+!
+interface Ethernet7
+!
+interface Ethernet8
+!
+interface Loopback0
+   ip address 10.20.2.1/32
+!
+interface Management1
+!
+ip routing
+!
+router bgp 65000
+   router-id 10.20.2.1
+   maximum-paths 4 ecmp 4
+   neighbor 10.0.2.5 remote-as 65021
+   neighbor 10.0.2.7 remote-as 65022
+   neighbor 10.0.2.11 remote-as 65023
+   neighbor 10.2.1.1 remote-as 65021
+   neighbor 10.2.1.1 update-source Loopback0
+   neighbor 10.2.1.1 ebgp-multihop 2
+   neighbor 10.2.1.1 route-reflector-client
+   neighbor 10.2.1.1 send-community extended
+   neighbor 10.2.2.1 remote-as 65022
+   neighbor 10.2.2.1 update-source Loopback0
+   neighbor 10.2.2.1 ebgp-multihop 2
+   neighbor 10.2.2.1 route-reflector-client
+   neighbor 10.2.2.1 send-community extended
+   neighbor 10.2.10.1 remote-as 65023
+   neighbor 10.2.10.1 update-source Loopback0
+   neighbor 10.2.10.1 ebgp-multihop 2
+   neighbor 10.2.10.1 route-reflector-client
+   neighbor 10.2.10.1 send-community extended
+   !
+   address-family evpn
+      neighbor 10.2.1.1 activate
+      neighbor 10.2.1.1 next-hop-unchanged
+      neighbor 10.2.2.1 activate
+      neighbor 10.2.2.1 next-hop-unchanged
+      neighbor 10.2.10.1 activate
+      neighbor 10.2.10.1 next-hop-unchanged
+   !
+   address-family ipv4
+      neighbor 10.0.2.5 activate
+      neighbor 10.0.2.7 activate
+      neighbor 10.0.2.11 activate
+      network 10.0.2.4/31
+      network 10.0.2.6/31
+      network 10.0.2.10/31
+      network 10.20.2.1/32
+!
+end
 
 ```
 </details>
@@ -456,6 +633,121 @@ end
 <summary>Конфигурация Leaf2_1</summary>
 
 ```bash
+leaf2_1#sh run
+! Command: show running-config
+! device: leaf2-1 (vEOS-lab, EOS-4.29.2F)
+!
+! boot system flash:/vEOS-lab.swi
+!
+no aaa root
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model multi-agent
+!
+hostname leaf2_1
+!
+spanning-tree mode mstp
+no spanning-tree vlan-id 1-4094
+!
+vlan 20
+   name TENANT-B
+!
+vrf instance VRF1
+!
+interface Port-Channel10
+   lacp system-id 0201.0012.000a
+!
+interface Ethernet1
+   description to-SPINE2_1
+   no switchport
+   ip address 10.0.2.1/31
+!
+interface Ethernet2
+   description to-SPINE2_2
+   no switchport
+   ip address 10.0.2.5/31
+!
+interface Ethernet3
+!
+interface Ethernet4
+!
+interface Ethernet5
+   switchport trunk allowed vlan 10
+!
+interface Ethernet6
+!
+interface Ethernet7
+!
+interface Ethernet8
+   description to-CLIENT
+   switchport access vlan 20
+!
+interface Loopback0
+   ip address 10.2.1.1/32
+!
+interface Management1
+!
+interface Vlan20
+   vrf VRF1
+   ip address 192.168.2.2/24
+   ip virtual-router address 192.168.2.1
+!
+interface Vxlan1
+   vxlan source-interface Loopback0
+   vxlan udp-port 4789
+   vxlan vlan 20 vni 10020
+   vxlan vrf VRF1 vni 111111
+   vxlan learn-restrict any
+!
+ip virtual-router mac-address 00:11:22:33:44:55
+ip virtual-router address subnet-routes
+!
+ip routing
+ip routing vrf VRF1
+!
+router bgp 65021
+   router-id 10.2.1.1
+   maximum-paths 2 ecmp 2
+   neighbor 10.0.2.0 remote-as 65000
+   neighbor 10.0.2.4 remote-as 65000
+   neighbor 10.20.1.1 remote-as 65000
+   neighbor 10.20.1.1 update-source Loopback0
+   neighbor 10.20.1.1 ebgp-multihop 2
+   neighbor 10.20.1.1 send-community extended
+   neighbor 10.20.2.1 remote-as 65000
+   neighbor 10.20.2.1 update-source Loopback0
+   neighbor 10.20.2.1 ebgp-multihop 2
+   neighbor 10.20.2.1 send-community extended
+   !
+   vlan 20
+      rd auto
+      route-target both 20:10020
+      redistribute learned
+   !
+   address-family evpn
+      neighbor 10.20.1.1 activate
+      neighbor 10.20.1.1 next-hop-unchanged
+      neighbor 10.20.2.1 activate
+      neighbor 10.20.2.1 next-hop-unchanged
+   !
+   address-family ipv4
+      neighbor 10.0.2.0 activate
+      neighbor 10.0.2.4 activate
+      network 10.0.2.0/31
+      network 10.0.2.4/31
+      network 10.2.1.1/32
+   !
+   vrf VRF1
+      rd 65021:1
+      route-target import evpn 1:111111
+      route-target export evpn 1:111111
+      redistribute connected
+      !
+      address-family ipv4
+         redistribute connected
+!
+end
 
 ```
 </details>
@@ -465,6 +757,117 @@ end
 <summary>Конфигурация Leaf2_2</summary>
 
 ```bash
+Leaf2_2#sh run
+! Command: show running-config
+! device: Leaf2-2 (vEOS-lab, EOS-4.29.2F)
+!
+! boot system flash:/vEOS-lab.swi
+!
+no aaa root
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model multi-agent
+!
+hostname Leaf2_2
+!
+spanning-tree mode mstp
+no spanning-tree vlan-id 1-4094
+!
+vlan 20
+   name TENANT-B
+!
+vrf instance VRF1
+!
+interface Ethernet1
+   description to-SPINE2_1
+   no switchport
+   ip address 10.0.2.3/31
+!
+interface Ethernet2
+   description to-SPINE2_2
+   no switchport
+   ip address 10.0.2.7/31
+!
+interface Ethernet3
+!
+interface Ethernet4
+!
+interface Ethernet5
+!
+interface Ethernet6
+!
+interface Ethernet7
+!
+interface Ethernet8
+   description to-CLIENT
+   switchport access vlan 20
+!
+interface Loopback0
+   ip address 10.2.2.1/32
+!
+interface Management1
+!
+interface Vlan20
+   vrf VRF1
+   ip address 192.168.2.3/24
+   ip virtual-router address 192.168.2.1
+!
+interface Vxlan1
+   vxlan source-interface Loopback0
+   vxlan udp-port 4789
+   vxlan vlan 20 vni 10020
+   vxlan vrf VRF1 vni 111111
+   vxlan learn-restrict any
+!
+ip virtual-router mac-address 00:11:22:33:44:55
+ip virtual-router address subnet-routes
+!
+ip routing
+ip routing vrf VRF1
+!
+router bgp 65022
+   router-id 10.2.2.1
+   maximum-paths 2 ecmp 2
+   neighbor 10.0.2.2 remote-as 65000
+   neighbor 10.0.2.6 remote-as 65000
+   neighbor 10.20.1.1 remote-as 65000
+   neighbor 10.20.1.1 update-source Loopback0
+   neighbor 10.20.1.1 ebgp-multihop 2
+   neighbor 10.20.1.1 send-community extended
+   neighbor 10.20.2.1 remote-as 65000
+   neighbor 10.20.2.1 update-source Loopback0
+   neighbor 10.20.2.1 ebgp-multihop 2
+   neighbor 10.20.2.1 send-community extended
+   !
+   vlan 20
+      rd auto
+      route-target both 20:10020
+      redistribute learned
+   !
+   address-family evpn
+      neighbor 10.20.1.1 activate
+      neighbor 10.20.1.1 next-hop-unchanged
+      neighbor 10.20.2.1 activate
+      neighbor 10.20.2.1 next-hop-unchanged
+   !
+   address-family ipv4
+      neighbor 10.0.2.2 activate
+      neighbor 10.0.2.6 activate
+      network 10.0.2.2/31
+      network 10.0.2.6/31
+      network 10.2.2.1/32
+   !
+   vrf VRF1
+      rd 65022:1
+      route-target import evpn 1:111111
+      route-target export evpn 1:111111
+      redistribute connected
+      !
+      address-family ipv4
+         redistribute connected
+!
+end
 
 ```
 </details>
