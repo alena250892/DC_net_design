@@ -1052,7 +1052,7 @@ end
 </details>
 
 
-### ⋅⋅*Настройка Border Leaf для связности между l2 сегментами ЦОДов
+### Настройка Border Leaf для связности между l2 сегментами ЦОДов
 1. настраиваем ebgp сессию между p2p линками. У меня линки собраны в Port-channel и интерфейсу дан адрес
 ## <img width="267" height="86" alt="изображение" src="https://github.com/user-attachments/assets/96b5a3c5-5534-4ef1-ad75-d102354baac3" />
 2. настраиваем evpn сессию между loopback 2х бордеров 
@@ -1124,7 +1124,7 @@ interface Ethernet5
 ####show port-channel dense
 ####<img width="705" height="291" alt="image" src="https://github.com/user-attachments/assets/b91a8fab-5bba-40d3-8bc2-359e046d5459" />
 ####show lacp interface Port-Channel10
-#
+
 Проверить состояние Ethernet Segment:
 ####show bgp evpn instance
 Должно быть State: up и назначен Designated Forwarder.
@@ -1133,11 +1133,11 @@ interface Ethernet5
 - Проверить наличие Type‑4 маршрутов:
 
 ####show bgp evpn route-type ethernet-segment
-####
+
 Проверить, что в Type‑2 маршрутах клиента указан ESI:
 
 ####show bgp evpn route-type mac-ip | include 0050.7966.6808
-####
+
 
 Проверка:
 
@@ -1166,7 +1166,7 @@ show bgp evpn route-type mac-ip | include 0050.7966.6808
 #### <img width="549" height="976" alt="image" src="https://github.com/user-attachments/assets/3d8ec976-ad33-404c-a3be-fa1281ff68c8" />
 
 ## 7. Траблшутинг сетевой связности между хостами в сетях 192.168.1.0/24 и 192.168.2.0/24
-⋅⋅* проверка на всех задействованых узлах сессий eBGP и BGP EVPN
+- проверка на всех задействованых узлах сессий eBGP и BGP EVPN
 <img width="917" height="276" alt="изображение" src="https://github.com/user-attachments/assets/91d3006f-c4e4-4c27-9c66-2259e4526957" />
 
 Если сессия EVPN не установливается возможные ошибки:
@@ -1182,4 +1182,5 @@ show bgp evpn route-type mac-ip | include 0050.7966.6808
 sh mac-address-table
 ### проверить что объявленный vlan попадает в нужный vni
 ### <img width="547" height="169" alt="изображение" src="https://github.com/user-attachments/assets/bcbab6b2-4980-4117-88e7-0ecd55cf319e" />
-
+- проверка маршрутов типа 2 и 3 на всех задейстованных Leaf
+- проверка связности между лифами и наличия маршрутов с типом ECMP в таблимце маршуртизации
