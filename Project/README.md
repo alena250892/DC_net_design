@@ -1121,25 +1121,24 @@ interface Ethernet5
 
 - Убедиться, что порт‑канал поднят и LACP активен:
 
-####show port-channel dense
-####<img width="705" height="291" alt="image" src="https://github.com/user-attachments/assets/b91a8fab-5bba-40d3-8bc2-359e046d5459" />
-####show lacp interface Port-Channel10
+#### show port-channel dense
+#### <img width="705" height="291" alt="image" src="https://github.com/user-attachments/assets/b91a8fab-5bba-40d3-8bc2-359e046d5459" />
+#### show lacp interface Port-Channel10
 
 Проверить состояние Ethernet Segment:
-####show bgp evpn instance
+#### show bgp evpn instance
 Должно быть State: up и назначен Designated Forwarder.
-####<img width="404" height="242" alt="image" src="https://github.com/user-attachments/assets/de1cc42d-4c13-4358-889e-ca6ed2f68250" />
+#### <img width="404" height="242" alt="image" src="https://github.com/user-attachments/assets/de1cc42d-4c13-4358-889e-ca6ed2f68250" />
 
 - Проверить наличие Type‑4 маршрутов:
 
-####show bgp evpn route-type ethernet-segment
+#### show bgp evpn route-type ethernet-segment
 
 Проверить, что в Type‑2 маршрутах клиента указан ESI:
 
-####show bgp evpn route-type mac-ip | include 0050.7966.6808
+#### show bgp evpn route-type mac-ip | include 0050.7966.6808
 
-
-Проверка:
+#### Траблшутинг
 
 Убедиться, что порт‑канал поднят и LACP активен:
 show port-channel summary
