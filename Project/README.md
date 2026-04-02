@@ -1,4 +1,4 @@
-<img width="1762" height="669" alt="image" src="https://github.com/user-attachments/assets/86c62375-ee5a-4660-b06a-cede0b434cb4" />## Проектирование сетевой фабрики на основе VxLAN EVPN.
+## Проектирование сетевой фабрики на основе VxLAN EVPN.
 
 ### План работ:
 #### 1. [Составление IP плана сети](#-ip-план-фабрики)
