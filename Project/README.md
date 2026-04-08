@@ -3,14 +3,14 @@
 ### План работ:
 #### 1. [Составление IP плана сети](#-ip-план-фабрики)
 #### 2. [Схема сети](#-Схема-сети)
-#### 3. Настройка Underlay EBGP
-#### 4. Настройка Overlay VXLAN EVPN
-##### ⋅⋅* Настройка оборудования ЦОД1
-##### ⋅⋅* Настройка оборудования ЦОД2
-##### ⋅⋅* Настройка Border Leaf для связности между l2 сегментами ЦОДов
-#### 5. Настройка Multihoming ethernet сегмента в ЦОД 1
-#### 6. Настройка инкапсуляции маршрута от EBGP соседа в фабрику
-#### 7. Траблшутинг 
+#### 3. [Настройка Underlay EBGP](#-Настройка-Underlay-EBGP)
+#### 4. [Настройка Overlay VXLAN EVPN](#-Настройка-Overlay-VXLAN-EVPN)
+##### ⋅⋅* [Настройка оборудования ЦОД1](#-Настройка-оборудования-ЦОД1) 
+##### ⋅⋅* [Настройка оборудования ЦОД2](#-Настройка-оборудования-ЦОД2)
+##### ⋅⋅* [Настройка Border Leaf для связности между l2 сегментами ЦОДов](#-Настройка-Border-Leaf-для-связности-между-l2-сегментами-ЦОДов)
+#### 5. [Настройка Multihoming ethernet сегмента в ЦОД 1](#-Настройка-Multihoming-ethernet-сегмента-в-ЦОД-1)
+#### 6. [Настройка инкапсуляции маршрута от EBGP соседа в фабрику](#-Настройка-инкапсуляции-маршрута-от-EBGP-соседа-в-фабрику)
+#### 7. [Траблшутинг](#-Траблшутинг)
 
 ---
 ## 1. IP-план фабрики
@@ -75,10 +75,10 @@
 
 ### <img width="1762" height="669" alt="image" src="https://github.com/user-attachments/assets/ed9b3a92-607f-40c6-afeb-afee7c3142c2" />
 
-#### 3. Настройка Underlay EBGP
+## 3. Настройка Underlay EBGP
 ## Нумерация AS (Автономных систем)
 
-### ЦОД-1
+#### ЦОД-1
 
 | Устройство          | AS Number | Роль                                                   |
 |---------------------|-----------|--------------------------------------------------------|
@@ -87,7 +87,7 @@
 | Leaf1_2             | 65002     | Underlay eBGP, Overlay iBGP                            |
 | BorderLeaf-1        | 65003     | Underlay eBGP, Overlay iBGP, DCI eBGP                  |
 
-### ЦОД-2
+#### ЦОД-2
 
 | Устройство          | AS Number | Роль                                                   |
 |---------------------|-----------|--------------------------------------------------------|
@@ -96,7 +96,7 @@
 | Leaf2_2             | 65022     | Underlay eBGP, Overlay iBGP                            |
 | BorderLeaf-2        | 65023     | Underlay eBGP, Overlay iBGP, DCI eBGP                  |
 
-### DCI
+#### DCI
 
 * eBGP между BorderLeaf-1 (AS 65003) и BorderLeaf-2 (AS 65023) через подсеть `10.100.1.0/30`.
 
@@ -107,7 +107,7 @@
   - Каждый коммутатор анонсирует свой Loopback‑адрес в BGP, формируя единую транспортную сеть.
 
 
-#### 4. Настройка Overlay VXLAN EVPN
+## 4. Настройка Overlay VXLAN EVPN
 **Цель:** Построить EVPN control‑plane для VXLAN, обеспечивающую обмен информацией о MAC‑адресах, VNI и IP‑префиксах между Leaf и BorderLeaf.
 
 **Архитектура:**
@@ -140,7 +140,7 @@ show vxlan vtep
 
 Ожидаемый результат: BGP EVPN‑сессии Established, в таблицах EVPN присутствуют Type‑2, Type‑3 маршруты, VXLAN туннели построены, клиенты в одном VLAN связываются.
 
-##### ⋅⋅*Настройка оборудования ЦОД1
+### Настройка оборудования ЦОД1
 
 <details>
 <summary>Конфигурация Spine1_1</summary>
@@ -612,7 +612,7 @@ end
 </details>
 
 
-## Настройка оборудования ЦОД2
+### Настройка оборудования ЦОД2
 
 <details>
 <summary>Конфигурация Spine2_1</summary>
@@ -1054,7 +1054,7 @@ end
 
 ### Настройка Border Leaf для связности между l2 сегментами ЦОДов
 1. настраиваем ebgp сессию между p2p линками. У меня линки собраны в Port-channel и интерфейсу дан адрес
-## <img width="267" height="86" alt="изображение" src="https://github.com/user-attachments/assets/96b5a3c5-5534-4ef1-ad75-d102354baac3" />
+### <img width="267" height="86" alt="изображение" src="https://github.com/user-attachments/assets/96b5a3c5-5534-4ef1-ad75-d102354baac3" />
 2. настраиваем evpn сессию между loopback 2х бордеров 
 - в общей таблице bgp создаем соседей и активируем их в  address-family evpn
 ### <img width="484" height="756" alt="изображение" src="https://github.com/user-attachments/assets/b33d3082-f918-4753-a35d-da84e9ed6c71" />
@@ -1069,7 +1069,7 @@ end
 ### <img width="301" height="154" alt="изображение" src="https://github.com/user-attachments/assets/c5d8a9fe-37b9-40e6-b0ee-d6f3bdec89ec" />
 ### <img width="617" height="936" alt="изображение" src="https://github.com/user-attachments/assets/a4cb9d9c-e9bf-4627-8429-6014eda479a6" />
 *** если ранее на leaf не был добавлен общий vni - необходимо добавить
-### CHECKING
+### Проверка
 - проверка связности сегментов
 #### первые пинги, ожидаемо, проходят не уверенно
 ### <img width="552" height="452" alt="изображение" src="https://github.com/user-attachments/assets/c7ab68fc-5371-45cb-9613-9d30406844d4" />
@@ -1078,16 +1078,15 @@ end
 - посмотреть что видно vtep соседнего POD
 ### <img width="315" height="180" alt="изображение" src="https://github.com/user-attachments/assets/49e02564-3da3-4678-ad76-4f60b5a535a0" />
 - посмотреть маршруты типа 3
-###
+### <img width="858" height="351" alt="image" src="https://github.com/user-attachments/assets/7e13166b-c3aa-4801-a851-0e0039ea5798" />
 - посмотреть маршруты типа 2
 ### <img width="849" height="486" alt="изображение" src="https://github.com/user-attachments/assets/a8b66728-8cdf-4cba-a70c-ccbf224cd187" />
 - посмотреть маршруты для vrf
-###
+### <img width="946" height="326" alt="image" src="https://github.com/user-attachments/assets/18b5608b-74f5-40e2-8cb3-ef6bdb10d4b7" />
 - проверить что l3vni есть
+### <img width="563" height="208" alt="image" src="https://github.com/user-attachments/assets/5bd5fa65-49a7-4750-9039-db0ddce3c08d" />
 
-
-
-### 5. Настройка Multihoming Ethernet сегмента в ЦОД‑1
+## 5. Настройка Multihoming Ethernet сегмента в ЦОД‑1
 
 **Цель:** Обеспечить отказоустойчивое подключение клиента двумя линками к разным Leaf (Leaf1_1 и Leaf1_2) с использованием стандартного механизма EVPN ESI LAG.
 
@@ -1139,7 +1138,7 @@ interface Ethernet5
 #### show bgp evpn route-type mac-ip | include 5000.0088.fe27
 <img width="565" height="96" alt="image" src="https://github.com/user-attachments/assets/01cc7e9d-9fba-46c4-a029-8d1663e5e6fe" />
 
-#### 6. Настройка инкапсуляции маршрута от EBGP соседа в фабрику
+## 6. Настройка инкапсуляции маршрута от EBGP соседа в фабрику
 1. Настроить P2P  интерфейсы на обоих роутерах
 2. На обоих роутерах поднять SVI интерфейсы
 3. На роутере без EVPN - просто настраиваем eBGP сессию с соседом, lO поднят просто для примера, именно его мы будем инскапсулировать в фабрику
