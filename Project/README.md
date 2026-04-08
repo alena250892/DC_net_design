@@ -1123,7 +1123,8 @@ interface Ethernet5
 
 #### show port-channel dense
 #### <img width="705" height="291" alt="image" src="https://github.com/user-attachments/assets/b91a8fab-5bba-40d3-8bc2-359e046d5459" />
-#### show lacp interface Port-Channel10
+#### sh lacp interface ethernet 5
+<img width="670" height="246" alt="image" src="https://github.com/user-attachments/assets/2a7f1c25-71be-425f-86f5-e5e546c2bb32" />
 
 Проверить состояние Ethernet Segment:
 #### show bgp evpn instance
@@ -1133,31 +1134,13 @@ interface Ethernet5
 - Проверить наличие Type‑4 маршрутов:
 
 #### show bgp evpn route-type ethernet-segment
-
+### <img width="791" height="235" alt="image" src="https://github.com/user-attachments/assets/a269a467-52c3-4144-b305-342407883e8e" />
 Проверить, что в Type‑2 маршрутах клиента указан ESI:
-
-#### show bgp evpn route-type mac-ip | include 0050.7966.6808
-
-#### Траблшутинг
-
-Убедиться, что порт‑канал поднят и LACP активен:
-show port-channel summary
-show lacp interface Port-Channel10
-Проверить состояние Ethernet Segment:
-
-show bgp evpn instance
-Должно быть State: up и назначен Designated Forwarder.
-Проверить наличие Type‑4 маршрутов:
-
-bash
-show bgp evpn route-type ethernet-segment
-Проверить, что в Type‑2 маршрутах клиента указан ESI:
-
-bash
-show bgp evpn route-type mac-ip | include 0050.7966.6808
+#### show bgp evpn route-type mac-ip | include 5000.0088.fe27
+<img width="565" height="96" alt="image" src="https://github.com/user-attachments/assets/01cc7e9d-9fba-46c4-a029-8d1663e5e6fe" />
 
 #### 6. Настройка инкапсуляции маршрута от EBGP соседа в фабрику
-1. Настроить P2P  интерфейсына обоих роутерах
+1. Настроить P2P  интерфейсы на обоих роутерах
 2. На обоих роутерах поднять SVI интерфейсы
 3. На роутере без EVPN - просто настраиваем eBGP сессию с соседом, lO поднят просто для примера, именно его мы будем инскапсулировать в фабрику
 #### <img width="407" height="323" alt="image" src="https://github.com/user-attachments/assets/8f6e0671-cb79-4137-8d45-9abe07b8ba66" />
@@ -1165,21 +1148,28 @@ show bgp evpn route-type mac-ip | include 0050.7966.6808
 #### <img width="549" height="976" alt="image" src="https://github.com/user-attachments/assets/3d8ec976-ad33-404c-a3be-fa1281ff68c8" />
 
 ## 7. Траблшутинг сетевой связности между хостами в сетях 192.168.1.0/24 и 192.168.2.0/24
-- проверка на всех задействованых узлах сессий eBGP и BGP EVPN
-<img width="917" height="276" alt="изображение" src="https://github.com/user-attachments/assets/91d3006f-c4e4-4c27-9c66-2259e4526957" />
-
-Если сессия EVPN не установливается возможные ошибки:
-- правильность id на всех узлах
-- не доступен neighbor (если это p2p - проверить связность утилитой пинг, если это loopback - наличие маршрута в GRT)
-- проверить что маршрут попадает в нужный vrf
-### посмотреть какие видно маршруты
-### <img width="1046" height="363" alt="изображение" src="https://github.com/user-attachments/assets/ab7f1c3a-47bf-4086-8a83-355b420073ce" />
-### посмотреть что vlan попадают в нужный vrf 
-### <img width="599" height="97" alt="изображение" src="https://github.com/user-attachments/assets/8263b898-0abd-460d-9d9e-ca887e45f217" />
-
-### посмотреть что устройства попадают в нужный vlan и vxlan
-sh mac-address-table
+После всех настроек нет связности между хостами 192.168.1.101 до 192.168.2.101
+1. посмотреть что устройства попадают в нужный vlan и vxlan
+### sh mac-address-table на лифе куда он подключен
+### <img width="663" height="270" alt="image" src="https://github.com/user-attachments/assets/c5b3105a-6a0d-4274-955f-97e776ce3d19" />
 ### проверить что объявленный vlan попадает в нужный vni
 ### <img width="547" height="169" alt="изображение" src="https://github.com/user-attachments/assets/bcbab6b2-4980-4117-88e7-0ecd55cf319e" />
-- проверка маршрутов типа 2 и 3 на всех задейстованных Leaf
-- проверка связности между лифами и наличия маршрутов с типом ECMP в таблимце маршуртизации
+### посмотреть что vlan попадают в нужный vrf 
+### <img width="599" height="97" alt="изображение" src="https://github.com/user-attachments/assets/8263b898-0abd-460d-9d9e-ca887e45f217" />
+### убедиться что с устройств точно доступны их GW
+2. проверка на всех задействованых узлах сессий eBGP и BGP EVPN (на лифах должны быть установлены сессии IPv4 с Spine-2шт, Border-2шт, EVPN с Border - 2 шт)
+<img width="917" height="276" alt="изображение" src="https://github.com/user-attachments/assets/91d3006f-c4e4-4c27-9c66-2259e4526957" />
+### Если сессия EVPN не установливается возможные ошибки:
+- правильность id на всех узлах
+- доступен ли нужный neighbor (если это p2p - проверить связность утилитой пинг, если это loopback - наличие маршрута в GRT)
+3. Проверить наличие маршрутов, связность
+### проверка связности между GW нужных сегментов
+<img width="768" height="239" alt="image" src="https://github.com/user-attachments/assets/7afde69f-7ac3-401e-9dcf-7637fd2a9f2e" />
+проверить что маршрут попадает в нужный vrf
+### <img width="960" height="330" alt="image" src="https://github.com/user-attachments/assets/6fed2c5b-28e7-4c76-a36f-e1888c3ee555" />
+### посмотреть какие видно маршруты
+### <img width="1046" height="363" alt="изображение" src="https://github.com/user-attachments/assets/ab7f1c3a-47bf-4086-8a83-355b420073ce" />
+### проверка маршрутов типа 2 и 3 на всех задейстованных Leaf
+### <img width="801" height="706" alt="image" src="https://github.com/user-attachments/assets/53695eb3-e034-4e24-a83c-6505f39f0a69" />
+
+
