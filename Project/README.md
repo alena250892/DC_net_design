@@ -107,8 +107,7 @@
   - На физических P2P-линках между Spine и Leaf поднимаются eBGP‑сессии.
   - Каждый коммутатор анонсирует свой Loopback‑адрес в BGP, формируя единую транспортную сеть.
 
-<div id="overlay"></div>
-## 4. Настройка Overlay VXLAN EVPN
+## 4. Настройка Overlay VXLAN EVPN <a id="overlay"></a>
 
 **Цель:** Построить EVPN control‑plane для VXLAN, обеспечивающую обмен информацией о MAC‑адресах, VNI и IP‑префиксах между Leaf и BorderLeaf.
 
