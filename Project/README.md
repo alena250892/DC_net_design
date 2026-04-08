@@ -1149,27 +1149,35 @@ interface Ethernet5
 
 ## 7. Траблшутинг <a id="troubleshooting"></a>
 После всех настроек нет связности между хостами в сетях 192.168.1.0/24 и 192.168.2.0/24
-1. посмотреть что устройства попадают в нужный vlan и vxlan
-### sh mac-address-table на лифе куда он подключен
+### 1. посмотреть что устройства попадают в нужный vlan и vxlan
+#### sh mac-address-table на лифе куда он подключен
 ### <img width="663" height="270" alt="image" src="https://github.com/user-attachments/assets/c5b3105a-6a0d-4274-955f-97e776ce3d19" />
-### проверить что объявленный vlan попадает в нужный vni
+#### проверить что объявленный vlan попадает в нужный vni
 ### <img width="547" height="169" alt="изображение" src="https://github.com/user-attachments/assets/bcbab6b2-4980-4117-88e7-0ecd55cf319e" />
-### посмотреть что vlan попадают в нужный vrf 
+#### посмотреть что vlan попадают в нужный vrf 
 ### <img width="599" height="97" alt="изображение" src="https://github.com/user-attachments/assets/8263b898-0abd-460d-9d9e-ca887e45f217" />
-### убедиться что с устройств точно доступны их GW
-2. проверка на всех задействованых узлах сессий eBGP и BGP EVPN (на лифах должны быть установлены сессии IPv4 с Spine-2шт, Border-2шт, EVPN с Border - 2 шт)
-<img width="917" height="276" alt="изображение" src="https://github.com/user-attachments/assets/91d3006f-c4e4-4c27-9c66-2259e4526957" />
-### Если сессия EVPN не установливается возможные ошибки:
+#### убедиться что с устройств точно доступны их GW
+### 2. проверка на всех задействованых узлах сессий eBGP и BGP EVPN (на лифах должны быть установлены сессии IPv4 с Spine-2шт, Border-2шт, EVPN с Border - 2 шт)
+### <img width="917" height="276" alt="изображение" src="https://github.com/user-attachments/assets/91d3006f-c4e4-4c27-9c66-2259e4526957" />
+#### Если сессия EVPN не установливается возможные ошибки:
 - правильность id на всех узлах
 - доступен ли нужный neighbor (если это p2p - проверить связность утилитой пинг, если это loopback - наличие маршрута в GRT)
-3. Проверить наличие маршрутов, связность
-### проверка связности между GW нужных сегментов
-<img width="768" height="239" alt="image" src="https://github.com/user-attachments/assets/7afde69f-7ac3-401e-9dcf-7637fd2a9f2e" />
+### 3. Проверить наличие маршрутов, связность
+
+#### проверка связности между GW нужных сегментов
+
+### <img width="768" height="239" alt="image" src="https://github.com/user-attachments/assets/7afde69f-7ac3-401e-9dcf-7637fd2a9f2e" />
+
 проверить что маршрут попадает в нужный vrf
+
 ### <img width="960" height="330" alt="image" src="https://github.com/user-attachments/assets/6fed2c5b-28e7-4c76-a36f-e1888c3ee555" />
-### посмотреть какие видно маршруты
+
+#### посмотреть какие видно маршруты
+
 ### <img width="1046" height="363" alt="изображение" src="https://github.com/user-attachments/assets/ab7f1c3a-47bf-4086-8a83-355b420073ce" />
-### проверка маршрутов типа 2 и 3 на всех задейстованных Leaf
+
+#### проверка маршрутов типа 2 и 3 на всех задейстованных Leaf
+
 ### <img width="801" height="706" alt="image" src="https://github.com/user-attachments/assets/53695eb3-e034-4e24-a83c-6505f39f0a69" />
 
 
