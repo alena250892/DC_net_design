@@ -12,7 +12,7 @@
 #### 6. [Настройка инкапсуляции маршрута от EBGP соседа в фабрику](#encapsulation)
 #### 7. [Траблшутинг](#troubleshooting)
 ---
-## 1. IP-план фабрики {#ip-plan}
+## 1. IP-план фабрики <a id="ip-plan"></a>
 ### 🏢 ЦОД-1 (DC1)
 #### Loopback (VTEP)
 | Устройство    | Loopback IP        | Назначение               |
@@ -70,12 +70,12 @@
 |------|----------|
 | VRF1 | 111111   |
 
-## 2. Схема сети {#shema}
+## 2. Схема сети <a id="shema"></a>
 ### <img width="865" height="643" alt="image" src="https://github.com/user-attachments/assets/7b016234-fc1d-4b15-91da-3c30e38368ce" />
 
 ### <img width="1762" height="669" alt="image" src="https://github.com/user-attachments/assets/ed9b3a92-607f-40c6-afeb-afee7c3142c2" />
 
-## 3. Настройка Underlay EBGP {#underlay}
+## 3. Настройка Underlay EBGP <a id="underlay"></a>
 
 ## Нумерация AS (Автономных систем)
 
@@ -141,7 +141,7 @@ show vxlan vtep
 
 Ожидаемый результат: BGP EVPN‑сессии Established, в таблицах EVPN присутствуют Type‑2, Type‑3 маршруты, VXLAN туннели построены, клиенты в одном VLAN связываются.
 
-### Настройка оборудования ЦОД1
+### Настройка оборудования ЦОД1 <a id="cod1"></a>
 
 <details>
 <summary>Конфигурация Spine1_1</summary>
@@ -613,7 +613,7 @@ end
 </details>
 
 
-### Настройка оборудования ЦОД2
+### Настройка оборудования ЦОД2 <a id="cod2"></a>
 
 <details>
 <summary>Конфигурация Spine2_1</summary>
@@ -1052,8 +1052,8 @@ end
 ```
 </details>
 
+### Настройка Border Leaf для связности между l2 сегментами ЦОДов <a id="border"></a>
 
-### Настройка Border Leaf для связности между l2 сегментами ЦОДов
 1. настраиваем ebgp сессию между p2p линками. У меня линки собраны в Port-channel и интерфейсу дан адрес
 ### <img width="267" height="86" alt="изображение" src="https://github.com/user-attachments/assets/96b5a3c5-5534-4ef1-ad75-d102354baac3" />
 2. настраиваем evpn сессию между loopback 2х бордеров 
@@ -1087,7 +1087,7 @@ end
 - проверить что l3vni есть
 ### <img width="563" height="208" alt="image" src="https://github.com/user-attachments/assets/5bd5fa65-49a7-4750-9039-db0ddce3c08d" />
 
-## 5. Настройка Multihoming Ethernet сегмента в ЦОД‑1
+## 5. Настройка Multihoming ethernet сегмента в ЦОД 1 <a id="multihoming"></a>
 
 **Цель:** Обеспечить отказоустойчивое подключение клиента двумя линками к разным Leaf (Leaf1_1 и Leaf1_2) с использованием стандартного механизма EVPN ESI LAG.
 
@@ -1139,7 +1139,7 @@ interface Ethernet5
 #### show bgp evpn route-type mac-ip | include 5000.0088.fe27
 <img width="565" height="96" alt="image" src="https://github.com/user-attachments/assets/01cc7e9d-9fba-46c4-a029-8d1663e5e6fe" />
 
-## 6. Настройка инкапсуляции маршрута от EBGP соседа в фабрику
+## 6. Настройка инкапсуляции маршрута от EBGP соседа в фабрику <a id="encapsulation"></a>
 1. Настроить P2P  интерфейсы на обоих роутерах
 2. На обоих роутерах поднять SVI интерфейсы
 3. На роутере без EVPN - просто настраиваем eBGP сессию с соседом, lO поднят просто для примера, именно его мы будем инскапсулировать в фабрику
@@ -1147,8 +1147,8 @@ interface Ethernet5
 4. На BorderLeaf-1 поднятый SVI интерфейс необходимо добавить в VRF, объявить в BGP EVPN и доавить в BGP VRF адрес SVI соседа
 #### <img width="549" height="976" alt="image" src="https://github.com/user-attachments/assets/3d8ec976-ad33-404c-a3be-fa1281ff68c8" />
 
-## 7. Траблшутинг сетевой связности между хостами в сетях 192.168.1.0/24 и 192.168.2.0/24
-После всех настроек нет связности между хостами 192.168.1.101 до 192.168.2.101
+## 7. Траблшутинг <a id="troubleshooting"></a>
+После всех настроек нет связности между хостами в сетях 192.168.1.0/24 и 192.168.2.0/24
 1. посмотреть что устройства попадают в нужный vlan и vxlan
 ### sh mac-address-table на лифе куда он подключен
 ### <img width="663" height="270" alt="image" src="https://github.com/user-attachments/assets/c5b3105a-6a0d-4274-955f-97e776ce3d19" />
